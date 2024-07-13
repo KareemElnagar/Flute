@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895694188405",
+    "project_id": "flute-365bb",
+    "storage_bucket": "flute-365bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895694188405:android:0bd825b49258471c0f2d3c",
+        "android_client_info": {
+          "package_name": "com.kareem.flute"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTXnp2pfBXSpWXB4wws0zvxc7f__XE9Jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
