@@ -64,11 +64,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        exoPlayer.removeListener(playerListener)
-        exoPlayer.release()
-    }
+
 
     fun showGif(show: Boolean) {
         if (show) {
