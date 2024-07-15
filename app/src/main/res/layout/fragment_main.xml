@@ -43,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:layout_above="@id/current_song"
         android:orientation="vertical">
 
         <LinearLayout
@@ -63,12 +64,160 @@
                 android:id="@+id/categories_RV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="16dp" />
 
-                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/Section1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Section1_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_bold"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:text="Trending" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow_right" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trending_RV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Section1_title" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Section2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Section2_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_bold"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:text="Classic" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow_right" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/section2_RV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Section2_title" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Section3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Section3_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_bold"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:text="All Time Hits" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow_right" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/section3_RV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Section3_title" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Section4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Section4_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_bold"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:text="Trending" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow_right" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/section4_RV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Section4_title" />
+            </RelativeLayout>
+
+
         </LinearLayout>
 
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/current_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/current_song_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:id="@+id/current_song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/current_song_image"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="Song Title"
+
+            />
+    </RelativeLayout>
 
 </RelativeLayout>
