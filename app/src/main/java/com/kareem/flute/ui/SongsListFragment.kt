@@ -1,4 +1,4 @@
-package com.kareem.flute
+package com.kareem.flute.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.kareem.flute.adapter.CategoryAdapter
 import com.kareem.flute.adapter.SongsListAdapter
 import com.kareem.flute.databinding.FragmentSongsListBinding
 import com.kareem.flute.models.CategoryModel

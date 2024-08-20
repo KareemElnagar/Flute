@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import com.google.firebase.firestore.FirebaseFirestore
 import com.kareem.flute.models.SongModel
 
 object MyExoPlayer {
@@ -28,6 +29,7 @@ object MyExoPlayer {
         }
         if (currentSong != song) {
             currentSong = song
+            updateCount()
             currentSong?.url?.apply {
                 val mediaItem = MediaItem.fromUri(this)
                 exoPlayer?.setMediaItem(mediaItem)
@@ -36,6 +38,25 @@ object MyExoPlayer {
             }
         }
 
+    }
+
+    private fun updateCount() {
+        currentSong?.id?.let {id ->
+            FirebaseFirestore.getInstance()
+                .collection("songs")
+                .document(id).get().addOnSuccessListener {
+                    var latestCount = it.getLong("count")
+                    if (latestCount == null) {
+                        latestCount = 1L
+
+                    } else {
+                        latestCount += 1
+                    }
+                    FirebaseFirestore.getInstance()
+                        .collection("songs")
+                        .document(id).update("count", latestCount)
+                }
+        }
     }
 
 }

@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.initialize
-import com.kareem.flute.adapter.CategoryAdapter
 import com.kareem.flute.databinding.ActivityMainBinding
-import com.kareem.flute.models.CategoryModel
+import com.kareem.flute.ui.MainFragment
+import com.kareem.flute.ui.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -26,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        replaceFragment(MainFragment(), false)
+        replaceFragment(LoginFragment(), false)
 
 
 

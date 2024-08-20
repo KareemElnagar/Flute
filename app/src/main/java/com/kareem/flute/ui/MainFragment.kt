@@ -1,14 +1,12 @@
-package com.kareem.flute
+package com.kareem.flute.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +16,16 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.toObjects
 import com.google.firebase.initialize
+import com.kareem.flute.MyExoPlayer
+import com.kareem.flute.R
 import com.kareem.flute.adapter.CategoryAdapter
 import com.kareem.flute.adapter.SectionSongListAdapter
 import com.kareem.flute.databinding.FragmentMainBinding
 import com.kareem.flute.models.CategoryModel
+import com.kareem.flute.models.SongModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -35,6 +37,7 @@ class MainFragment : Fragment() {
     private val TAG = "MainFragment"
     private val songsListFragment = SongsListFragment()
     private val playerFragment = PlayerFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +64,7 @@ class MainFragment : Fragment() {
             getCategories()
             getSections("section_1", binding.Section1Title, binding.trendingRV, binding.Section1)
             getSections("section_2", binding.Section2Title, binding.section2RV, binding.Section2)
-            getSections("section_2", binding.Section3Title, binding.section3RV, binding.Section3)
+            setupMostPlayed("section_3", binding.Section3Title, binding.section3RV, binding.Section3)
         }
 
 
@@ -136,6 +139,47 @@ class MainFragment : Fragment() {
 
                     }
                 }
+            }
+
+    }
+
+    private fun setupMostPlayed(
+        id: String,
+        sectionTitle: TextView,
+        recyclerView: RecyclerView,
+        relativeLayout: RelativeLayout
+    ) {
+        db.collection("sections")
+            .document(id)
+            .get().addOnSuccessListener {
+                FirebaseFirestore.getInstance().collection("songs")
+                    .orderBy("count", Query.Direction.DESCENDING)
+                    .limit(5).get().addOnSuccessListener { songsListSnapShot ->
+                        val songsModelList = songsListSnapShot.toObjects<SongModel>()
+                        val songsIdList = songsModelList.map {
+                            it.id
+                        }.toList()
+
+                        val sectionList = it.toObject(CategoryModel::class.java)
+                        sectionList?.apply {
+                            sectionList.songs = songsIdList
+                            relativeLayout.visibility = View.VISIBLE
+                            sectionTitle.text = name
+                            recyclerView.adapter = SectionSongListAdapter(songs)
+                            recyclerView.layoutManager =
+                                LinearLayoutManager(
+                                    requireContext(),
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
+                            relativeLayout.setOnClickListener {
+                                songsListFragment.category = sectionList
+                                replaceFragment(songsListFragment)
+
+                            }
+                        }
+                    }
+
             }
 
     }
