@@ -7,7 +7,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.kareem.flute.databinding.ActivityMainBinding
-import com.kareem.flute.ui.MainFragment
 import com.kareem.flute.ui.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {

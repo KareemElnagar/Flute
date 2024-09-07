@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.toObjects
@@ -26,6 +28,7 @@ import com.kareem.flute.adapter.SectionSongListAdapter
 import com.kareem.flute.databinding.FragmentMainBinding
 import com.kareem.flute.models.CategoryModel
 import com.kareem.flute.models.SongModel
+import com.kareem.flute.ui.login.LoginFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -64,7 +67,16 @@ class MainFragment : Fragment() {
             getCategories()
             getSections("section_1", binding.Section1Title, binding.trendingRV, binding.Section1)
             getSections("section_2", binding.Section2Title, binding.section2RV, binding.Section2)
-            setupMostPlayed("section_3", binding.Section3Title, binding.section3RV, binding.Section3)
+            setupMostPlayed(
+                "section_3",
+                binding.Section3Title,
+                binding.section3RV,
+                binding.Section3
+            )
+        }
+        // show popup menu
+        binding.menu.setOnClickListener {
+            showPopupMenu()
         }
 
 
@@ -74,11 +86,38 @@ class MainFragment : Fragment() {
 
         }
 
+
     }
 
     override fun onResume() {
         super.onResume()
         showCurrentSong()
+    }
+
+    private fun showPopupMenu() {
+
+        val popupMenu = PopupMenu(context, binding.menu)
+        val inflator = popupMenu.menuInflater
+        inflator.inflate(R.menu.option_menu, popupMenu.menu)
+        popupMenu.show()
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.logout -> {
+                    logout()
+                    true
+                }
+            }
+            false
+        }
+
+
+    }
+
+
+    fun logout() {
+        MyExoPlayer.getInstance()?.release()
+        FirebaseAuth.getInstance().signOut()
+        replaceFragmentPop(LoginFragment())
     }
 
     private fun showCurrentSong() {
@@ -105,6 +144,13 @@ class MainFragment : Fragment() {
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         transaction.addToBackStack(null)
+        transaction.commit()
+    }
+    private fun replaceFragmentPop(fragment: Fragment) {
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_layout, fragment)
+        requireActivity().supportFragmentManager.popBackStackImmediate()
         transaction.commit()
     }
 
