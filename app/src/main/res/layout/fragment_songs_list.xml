@@ -7,7 +7,7 @@
     android:background="@color/black"
     android:padding="16dp"
     android:gravity="center"
-    tools:context=".SongsListFragment">
+    tools:context=".ui.SongsListFragment">
 
     <ImageView
         android:layout_width="150dp"

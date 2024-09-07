@@ -1,4 +1,4 @@
-package com.kareem.flute
+package com.kareem.flute.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
+import com.kareem.flute.MyExoPlayer
+import com.kareem.flute.R
 import com.kareem.flute.databinding.FragmentPlayerBinding
 
 class PlayerFragment : Fragment() {

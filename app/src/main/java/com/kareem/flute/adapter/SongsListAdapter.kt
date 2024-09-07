@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kareem.flute.MainActivity
 import com.kareem.flute.MyExoPlayer
-import com.kareem.flute.PlayerFragment
+import com.kareem.flute.ui.PlayerFragment
 import com.kareem.flute.R
 import com.kareem.flute.databinding.SongListRecyclerRowBinding
 import com.kareem.flute.models.SongModel
